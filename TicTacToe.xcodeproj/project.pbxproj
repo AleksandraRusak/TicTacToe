@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F20BD3DB2AB22D3D00A12C02 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BD3DA2AB22D3D00A12C02 /* PlayerViewController.swift */; };
+		F20BD3DD2AB2485D00A12C02 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BD3DC2AB2485D00A12C02 /* GameViewController.swift */; };
+		F20BD3DF2AB24ABE00A12C02 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BD3DE2AB24ABE00A12C02 /* Player.swift */; };
 		F2D99C5C2AAF8870001879E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5B2AAF8870001879E8 /* AppDelegate.swift */; };
 		F2D99C5E2AAF8870001879E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5D2AAF8870001879E8 /* SceneDelegate.swift */; };
 		F2D99C602AAF8870001879E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D99C5F2AAF8870001879E8 /* ViewController.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F20BD3DA2AB22D3D00A12C02 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		F20BD3DC2AB2485D00A12C02 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		F20BD3DE2AB24ABE00A12C02 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		F2D99C582AAF8870001879E8 /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D99C5B2AAF8870001879E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F2D99C5D2AAF8870001879E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,9 @@
 				F2D99C642AAF8872001879E8 /* Assets.xcassets */,
 				F2D99C662AAF8872001879E8 /* LaunchScreen.storyboard */,
 				F2D99C692AAF8872001879E8 /* Info.plist */,
+				F20BD3DA2AB22D3D00A12C02 /* PlayerViewController.swift */,
+				F20BD3DC2AB2485D00A12C02 /* GameViewController.swift */,
+				F20BD3DE2AB24ABE00A12C02 /* Player.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -258,8 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F20BD3DD2AB2485D00A12C02 /* GameViewController.swift in Sources */,
 				F2D99C602AAF8870001879E8 /* ViewController.swift in Sources */,
+				F20BD3DB2AB22D3D00A12C02 /* PlayerViewController.swift in Sources */,
 				F2D99C5C2AAF8870001879E8 /* AppDelegate.swift in Sources */,
+				F20BD3DF2AB24ABE00A12C02 /* Player.swift in Sources */,
 				F2D99C5E2AAF8870001879E8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
