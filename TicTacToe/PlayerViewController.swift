@@ -9,7 +9,9 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
-    
+    // En klass som ärver från UIViewController för att hantera spelarvyn.
+       
+       // MARK: - Outlets för att ansluta till gränssnittselement i storyboard.
     @IBOutlet weak var lblResult: UILabel!
     @IBOutlet weak var imgResult: UIImageView!
     @IBOutlet weak var tfPlayer1: UITextField!
@@ -30,7 +32,7 @@ class PlayerViewController: UIViewController {
     
     
     @IBAction func switchAction(_ sender: UISwitch) {
-        
+        // Hantera klick på växelspaken för att växla mellan datorspel och spel mot spelare.
         if sender.isOn {
             isComputerGame = true
             tfPlayer2.isHidden = true
@@ -46,12 +48,13 @@ class PlayerViewController: UIViewController {
         
     }
     
-    /*
-    
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Förberedelser inför övergången till spelvyn.
         if segue.identifier == gameSegue {
             let destinationVC = segue.destination as! GameViewController
             
+            // Ange spelarnas namn och spelläge.
             if tfPlayer1.text == "" {
                 tfPlayer1.text = "Player 1"
             }
@@ -72,6 +75,6 @@ class PlayerViewController: UIViewController {
              
         }
     }
-             */
+        
 
 }
