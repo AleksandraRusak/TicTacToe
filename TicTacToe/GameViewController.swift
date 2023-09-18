@@ -31,17 +31,17 @@ class GameViewController: UIViewController {
     var receivingName2: String?
     var isComputerGame: Bool = false
     
-    // Skapa en instans av spelet och sätta dess initiala värden.
+    // Skapa en instans av spelet och sätta dess initiala värden. Game är en instans av TicTacToeGame-klassen
     var game: TicTacToeGame = TicTacToeGame(
         player1: Player(name: "Player 1", isTurn: true, score: 0, isComputer: false),
         player2: Player(name: "Player 2", isTurn: false, score: 0, isComputer: false))
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGame()
+        setupGame() //I detta fall anropar den setupGame-metoden för att förbereda spelet när vyn har laddats.
     }
     
-    // Förbered spelet vid vyns laddning.
+    // setupGame-metoden används för att sätta upp spelet.
     func setupGame() {
         // Sätt etiketter med spelarnas namn.
         if let receivingName1 = receivingName1,
@@ -56,7 +56,7 @@ class GameViewController: UIViewController {
     }
     
     
-    
+    // onPress-metoden anropas när en av spelcellerna (knappar) klickas på. Den bestämmer vilken cell som klickades på genom att antingen använda det skickade knappens tag-egenskap eller genom att anropa computerTurn (om det är datorns tur). Sedan anropas cellOnPress-metoden med taggen för att hantera draget.
     @IBAction func onPress(_ sender: UIButton) {
         
         var tag: Int?
@@ -67,7 +67,7 @@ class GameViewController: UIViewController {
             tag = sender.tag
         }
         
-        //        cellOnPress(tag: tag ?? 0)
+        // cellOnPress(tag: tag ?? 0)
         
         switch tag {
         case 0: cellOnPress(tag: tag ?? 0)
@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    
+    // onReset-metoden används när återställningsknappen trycks. Den återställer spelets tillstånd genom att återställa variabler, rensa alla spelceller och uppdatera användargränssnittet för att visa rätt meddelanden och dölja återställningsknappen.
     @IBAction func onReset(_ sender: UIButton) {
         
         if let receivingName1 = receivingName1,
@@ -180,9 +180,9 @@ class GameViewController: UIViewController {
     
     // Funktion för automatiskt datorns drag.
     func autoPress(timer: Timer) {
-        let dummyButton = UIButton()
-            onPress(dummyButton)
-        //onPress(nil)
+  let dummyButton = UIButton()
+       onPress(dummyButton)
+       // onPress(nil)
     }
     
     // Nedanstående funktioner hanterar gränssnittet.

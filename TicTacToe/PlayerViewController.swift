@@ -11,7 +11,7 @@ class PlayerViewController: UIViewController {
     
     // En klass som ärver från UIViewController för att hantera spelarvyn.
        
-       // MARK: - Outlets för att ansluta till gränssnittselement i storyboard.
+    // Outlets för att ansluta till gränssnittselement i storyboard.
     @IBOutlet weak var lblResult: UILabel!
     @IBOutlet weak var imgResult: UIImageView!
     @IBOutlet weak var tfPlayer1: UITextField!
@@ -48,7 +48,7 @@ class PlayerViewController: UIViewController {
         
     }
     
-    // MARK: - Navigation
+    // Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Förberedelser inför övergången till spelvyn.
         if segue.identifier == gameSegue {

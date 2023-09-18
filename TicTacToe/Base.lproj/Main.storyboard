@@ -240,7 +240,7 @@
                                     <action selector="onReset:" destination="qPF-xv-dke" eventType="touchUpInside" id="laN-PK-igM"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ISe-SI-p9r">
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ISe-SI-p9r">
                                 <rect key="frame" x="36.666666666666657" y="171" width="320" height="357"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kI9-y1-Sgs">
@@ -249,7 +249,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QE-Tf-I7q">
                                                 <rect key="frame" x="0.0" y="0.0" width="119" height="119"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="cell"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="cell">
+                                                    <backgroundConfiguration key="background"/>
+                                                    <color key="baseForegroundColor" red="0.97647058959999999" green="0.84705877299999999" blue="0.28627452250000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onPress:" destination="qPF-xv-dke" eventType="touchUpInside" id="bJT-Ty-I9c"/>
                                                 </connections>
@@ -257,7 +260,9 @@
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKK-bH-gcj">
                                                 <rect key="frame" x="118" y="0.0" width="84" height="119"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="cell"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="cell">
+                                                    <color key="baseForegroundColor" red="0.97647058959999999" green="0.84705877299999999" blue="0.28627452250000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onPress:" destination="qPF-xv-dke" eventType="touchUpInside" id="EcU-fU-Hpu"/>
                                                 </connections>
@@ -265,7 +270,9 @@
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5S-jT-aCj">
                                                 <rect key="frame" x="201" y="0.0" width="119" height="119"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="cell"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="cell">
+                                                    <color key="baseForegroundColor" red="0.97647058959999999" green="0.84705877299999999" blue="0.28627452250000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="onPress:" destination="qPF-xv-dke" eventType="touchUpInside" id="cXD-AB-eB9"/>
                                                 </connections>
@@ -331,7 +338,8 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.32549020649999999" green="0.71764707569999997" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.97647058959999999" green="0.84705877299999999" blue="0.28627452250000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" red="0.32549020649999999" green="0.71764707569999997" blue="0.85490196939999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="320" id="5L4-hq-elc"/>
                                     <constraint firstItem="cYe-aK-B3A" firstAttribute="centerX" secondItem="ISe-SI-p9r" secondAttribute="centerX" id="FHT-Cf-VM0"/>
