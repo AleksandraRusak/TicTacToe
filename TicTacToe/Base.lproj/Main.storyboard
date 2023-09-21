@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="ViewController" customModule="TicTacToe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,6 +380,7 @@
                         <outlet property="lblPlayer2Name" destination="dQu-e4-YCM" id="ge2-y4-ggD"/>
                         <outlet property="lblPlayer2Score" destination="rYT-Ba-1dc" id="x4V-Hg-v7p"/>
                         <outlet property="lblTitle" destination="jT8-pa-cyp" id="5RE-Dg-JD6"/>
+                        <outlet property="stackView" destination="ISe-SI-p9r" id="xcR-sh-yuw"/>
                         <outletCollection property="imgBtns" destination="4QE-Tf-I7q" collectionClass="NSMutableArray" id="xJj-GB-SQP"/>
                         <outletCollection property="imgBtns" destination="sKK-bH-gcj" collectionClass="NSMutableArray" id="51a-go-rFc"/>
                         <outletCollection property="imgBtns" destination="e5S-jT-aCj" collectionClass="NSMutableArray" id="8Bb-LJ-hkg"/>

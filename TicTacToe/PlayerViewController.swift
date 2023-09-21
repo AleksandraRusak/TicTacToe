@@ -54,7 +54,7 @@ class PlayerViewController: UIViewController {
         if segue.identifier == gameSegue {
             let destinationVC = segue.destination as! GameViewController
             
-            // Ange spelarnas namn och spelläge.
+            // Ange spelarnas namn och spelläge. kan bli tom
             if tfPlayer1.text == "" {
                 tfPlayer1.text = "Player 1"
             }

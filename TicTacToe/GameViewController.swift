@@ -17,6 +17,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var lblPlayer1Score: UILabel!
     @IBOutlet weak var lblPlayer2Score: UILabel!
     @IBOutlet weak var btnReset: UIButton!
+    @IBOutlet weak var stackView: UIStackView!
     
     
     @IBOutlet var imgBtns: [UIButton]!
@@ -38,6 +39,7 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        stackView.layer.cornerRadius = 23
         setupGame() //I detta fall anropar den setupGame-metoden för att förbereda spelet när vyn har laddats.
     }
     
@@ -178,12 +180,23 @@ class GameViewController: UIViewController {
         }
     }
     
+    
     // Funktion för automatiskt datorns drag.
     func autoPress(timer: Timer) {
-  let dummyButton = UIButton()
-       onPress(dummyButton)
-       // onPress(nil)
+        if game.isPlayerTurn[1] && !game.hasWon && !game.isDraw {
+            // Generate a random move for the computer player (player2).
+            var randomMove = Int.random(in: 0...8)
+
+            // Keep generating random moves until an available move is found.
+            while game.isButtonTapped[randomMove] {
+                randomMove = Int.random(in: 0...8)
+            }
+
+            // Call cellOnPress with the computed tag for the move.
+            cellOnPress(tag: randomMove)
+        }
     }
+    
     
     // Nedanstående funktioner hanterar gränssnittet.
     func getImage(isPlayerTurn: Array<Bool>) -> UIImage {
