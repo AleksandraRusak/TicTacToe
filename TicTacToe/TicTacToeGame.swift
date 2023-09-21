@@ -3,6 +3,8 @@
 //  TicTacToe
 //
 //  Created by Aleksandra Rusak on 2023-09-17.
+
+
 //Den hanterar spelets logik, inklusive att avgöra om någon har vunnit, om spelet har slutat oavgjort och andra relevanta aspekter av spelet.
 
 import Foundation
@@ -13,23 +15,24 @@ class TicTacToeGame {
     var player1: Player
     var player2: Player
     
-// I init metoden, som är en konstruktor, skapar vi en instans av TicTacToeGame med två spelare som skickas som argument. Detta låter oss sätta spelarnas egenskaper när vi skapar ett nytt spel.
+    // Konstruktor som skapar en instans av spelet med två spelare.
     init(player1: Player, player2: Player) {
         self.player1 = player1
         self.player2 = player2
     }
     
-    var isPlayerTurn: Array<Bool> = [true, false] // true representerar player1, och false - player2.
+    // En array som håller koll på vilken spelare som har tur.
+    var isPlayerTurn: [Bool] = [true, false] // true representerar player1, och false - player2.
     var isGameStarted = false
     var hasWon: Bool = false
     var isDraw = false
     
-     // isButtonTapped är en array som håller koll på vilka spelceller som har blivit tryckta.
-    var isButtonTapped: Array<Bool> = [false, false, false, false, false, false, false, false, false]
+    // En array som håller koll på vilka celler som har klickats på.
+    var isButtonTapped: [Bool] = [false, false, false, false, false, false, false, false, false]
     
     // player1Array och player2Array är arrayer som håller koll på vilka celler varje spelare har markerat.
-    var player1Array: Array<Int> = []
-    var player2Array: Array<Int> = []
+    var player1Array: [Int] = []
+    var player2Array: [Int] = []
     
     // winConditions är en array av arrays som innehåller alla möjliga sätt att vinna spelet.
     var winConditions: Array<Array<Int>> = [

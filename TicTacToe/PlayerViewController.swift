@@ -20,6 +20,7 @@ class PlayerViewController: UIViewController {
     
     
     var isComputerGame: Bool = false
+    
     let gameSegue: String = "gameSegue"
     
     override func viewDidLoad() {
@@ -32,19 +33,24 @@ class PlayerViewController: UIViewController {
     
     
     @IBAction func switchAction(_ sender: UISwitch) {
-        // Hantera klick på växelspaken för att växla mellan datorspel och spel mot spelare.
-        if sender.isOn {
-            isComputerGame = true
-            tfPlayer2.isHidden = true
-            imgResult.image = UIImage(named: "computer")
-            lblResult.text = "Game against computer"
-        } else {
-            isComputerGame = false
-            tfPlayer2.isHidden = false
-            imgResult.image = UIImage(named: "person")
-            lblResult.text = "Game against player"
-        }
+        // spel mot dator och spel mot spelare.
+//        if sender.isOn {
+//            isComputerGame = true
+//            tfPlayer2.isHidden = true
+//            imgResult.image = UIImage(named: "computer")
+//            lblResult.text = "Game against computer"
+//        } else {
+//            isComputerGame = false
+//            tfPlayer2.isHidden = false
+//            imgResult.image = UIImage(named: "person")
+//            lblResult.text = "Game against player"
+//        }
         
+        
+        isComputerGame = sender.isOn
+                tfPlayer2.isHidden = isComputerGame
+                imgResult.image = UIImage(named: isComputerGame ? "computer" : "person")
+                lblResult.text = isComputerGame ? "Game against computer" : "Game against player"
         
     }
     
@@ -63,6 +69,7 @@ class PlayerViewController: UIViewController {
                 tfPlayer2.text = "Player 2"
             }
             
+            // Kontrollera om det är ett datorspel eller ett tvåspelarsspel och skicka relevanta uppgifter till nästa vy.
             if isComputerGame {
                 destinationVC.isComputerGame = true
                 destinationVC.receivingName1 = tfPlayer1.text
