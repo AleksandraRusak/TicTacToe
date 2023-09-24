@@ -35,7 +35,7 @@ class TicTacToeGame {
     var player2Array: [Int] = []
     
     // winConditions är en array av arrays som innehåller alla möjliga sätt att vinna spelet.
-    var winConditions: Array<Array<Int>> = [
+    var winConditions: [[Int]] = [
         [0, 1, 2],
         [3, 4, 5],
         [6, 7, 8],
@@ -56,14 +56,15 @@ class TicTacToeGame {
         }
         return computerTurn()
     }
-    // getRandomInt-metoden returnerar ett slumpmässigt heltal mellan 0 och 8, som används av computerTurn för att välja en ledig cell.
+    
+    // getRandomInt-metoden genererar ett slumpmässigt heltal mellan 0 och 8.
     func getRandomInt() -> Int {
         let randomInt = Int.random(in: 0...8)
         return randomInt
     }
 
     // toggleTurn-metoden används för att ändra turordningen mellan spelarna. Om isPlayerTurn är [true, false] kommer det att ändras till [false, true], och vice versa.
-    func toggleTurn(isPlayerTurn: Array<Bool>) -> Array<Bool> {
+    func toggleTurn(isPlayerTurn: [Bool]) -> [Bool] {
         var isPlayerTurn = isPlayerTurn
         
         if isPlayerTurn[0] {
@@ -75,7 +76,7 @@ class TicTacToeGame {
     }
     
     // appendToPlayerArray-metoden används för att lägga till indexet för en markerad cell till den aktuella spelarens array (player1Array eller player2Array).
-    func appendToPlayerArray(isPlayerTurn: Array<Bool>, index: Int) {
+    func appendToPlayerArray(isPlayerTurn: [Bool], index: Int) {
         if isPlayerTurn[0] {
             player1Array.append(index)
         } else {
@@ -83,7 +84,7 @@ class TicTacToeGame {
         }
     }
     
-    func checkIfWon(playerArray: Array<Int>) -> Bool {
+    func checkIfWon(playerArray: [Int]) -> Bool {
         if playerArray.count < 3 {
             return false
         } else {
@@ -96,19 +97,24 @@ class TicTacToeGame {
         return false
     }
     
+    // Kontrollera om spelet är oavgjort.
     func checkIfDraw() -> Bool {
-        var count = 0
+        var count = 0 // Här deklareras en variabel count som används för att räkna antalet knappar (spelceller) som har blivit klickade.
+        // Här startar en loop som itererar genom arrayen isButtonTapped, som innehåller information om vilka spelceller som har blivit klickade.
         for tapped in isButtonTapped {
-            if tapped == true {
-                count += 1
+            if tapped == true { // betyder att den motsvarande spelcellen har blivit klickad.
+                count += 1 // Om villkoret är sant, ökas värdet på count med 1. Detta innebär att om en spelcell har blivit klickad, kommer count att öka med 1.
             }
         }
+        
+        // Efter att loopen har slutförts, kontrolleras om count är lika med 9 (vilket är det totala antalet spelceller) och om hasWon är false. Om båda dessa villkor är sanna, innebär det att alla spelceller har blivit klickade och att ingen har vunnit spelet.
         if count == 9 && !hasWon {
-            return true
+            return true // Om villkoret är sant, returneras true, vilket indikerar att spelet har slutat i oavgjort (ingen har vunnit).
         }
-        return false
+        return false // Om något av de tidigare villkoren inte är uppfyllda, indikerar att spelet inte har slutat i oavgjort och fortsätter.
     }
     
+    // Återställ spelets tillstånd.
     func onGameReset() {
         isButtonTapped = [false, false, false, false, false, false, false, false, false]
         player1Array = []
@@ -117,6 +123,7 @@ class TicTacToeGame {
         isDraw = false
     }
     
+    // Uppdatera spelarnas poäng.
     func updateScore() {
         if isPlayerTurn[0] {
             player2.score += 1

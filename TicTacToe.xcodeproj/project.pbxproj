@@ -84,6 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F20BD45C2AC03D4C00A12C02 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F20BD3DE2AB24ABE00A12C02 /* Player.swift */,
+				F20BD41C2AB754B200A12C02 /* TicTacToeGame.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F20BD45D2AC0599200A12C02 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F20BD3DA2AB22D3D00A12C02 /* PlayerViewController.swift */,
+				F20BD3DC2AB2485D00A12C02 /* GameViewController.swift */,
+				F2D99C5F2AAF8870001879E8 /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		F2D99C4F2AAF8870001879E8 = {
 			isa = PBXGroup;
 			children = (
@@ -107,17 +126,14 @@
 		F2D99C5A2AAF8870001879E8 /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
-				F20BD41C2AB754B200A12C02 /* TicTacToeGame.swift */,
+				F20BD45D2AC0599200A12C02 /* ViewController */,
+				F20BD45C2AC03D4C00A12C02 /* Model */,
 				F2D99C5B2AAF8870001879E8 /* AppDelegate.swift */,
 				F2D99C5D2AAF8870001879E8 /* SceneDelegate.swift */,
-				F2D99C5F2AAF8870001879E8 /* ViewController.swift */,
 				F2D99C612AAF8870001879E8 /* Main.storyboard */,
 				F2D99C642AAF8872001879E8 /* Assets.xcassets */,
 				F2D99C662AAF8872001879E8 /* LaunchScreen.storyboard */,
 				F2D99C692AAF8872001879E8 /* Info.plist */,
-				F20BD3DA2AB22D3D00A12C02 /* PlayerViewController.swift */,
-				F20BD3DC2AB2485D00A12C02 /* GameViewController.swift */,
-				F20BD3DE2AB24ABE00A12C02 /* Player.swift */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
