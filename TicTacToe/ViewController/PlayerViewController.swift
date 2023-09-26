@@ -34,19 +34,6 @@ class PlayerViewController: UIViewController {
     
     @IBAction func switchAction(_ sender: UISwitch) {
         // spel mot dator och spel mot spelare.
-//        if sender.isOn {
-//            isComputerGame = true
-//            tfPlayer2.isHidden = true
-//            imgResult.image = UIImage(named: "computer")
-//            lblResult.text = "Game against computer"
-//        } else {
-//            isComputerGame = false
-//            tfPlayer2.isHidden = false
-//            imgResult.image = UIImage(named: "person")
-//            lblResult.text = "Game against player"
-//        }
-        
-        
         isComputerGame = sender.isOn
                 tfPlayer2.isHidden = isComputerGame
                 imgResult.image = UIImage(named: isComputerGame ? "computer" : "person")
@@ -54,7 +41,6 @@ class PlayerViewController: UIViewController {
         
     }
     
-    // Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Förberedelser inför övergången till spelvyn.
         if segue.identifier == gameSegue {

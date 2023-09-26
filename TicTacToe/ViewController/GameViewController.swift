@@ -142,7 +142,7 @@ class GameViewController: UIViewController {
             imgBtns[tag].setImage(getImage(isPlayerTurn: game.isPlayerTurn), for: .normal)
             
             // Byt tur till den andra spelaren.
-            game.isPlayerTurn = game.toggleTurn(isPlayerTurn: game.isPlayerTurn)
+            game.isPlayerTurn = game.switchPlayerTurn(isPlayerTurn: game.isPlayerTurn)
             
             // Uppdatera namnet på den aktuella spelaren.
             lblName.text = getPlayerName(isPlayerTurn: game.isPlayerTurn, name1: receivingName1, name2: receivingName2)
@@ -224,7 +224,7 @@ class GameViewController: UIViewController {
     
     // Denna funktion används för att hämta rätt bild (X eller O) för den aktuella spelaren baserat på det aktuella dragets spelarvändning.
     
-    func getImage(isPlayerTurn: Array<Bool>) -> UIImage {
+    func getImage(isPlayerTurn: [Bool]) -> UIImage {
         if game.isPlayerTurn[0] {
             return UIImage(named: "X") ?? UIImage(named: "cell")!
         } else if game.isPlayerTurn[1] {
@@ -236,7 +236,7 @@ class GameViewController: UIViewController {
     
     // Denna funktion används för att hämta rätt spelarnamn baserat på den aktuella spelarvändningen.
     // Om det är spelare 1:s tur returneras namn1, och om det är spelare 2:s tur returneras namn2.
-    func getPlayerName(isPlayerTurn: Array<Bool>, name1: String, name2: String) -> String {
+    func getPlayerName(isPlayerTurn: [Bool], name1: String, name2: String) -> String {
         if game.isPlayerTurn[0] {
             return name1
         } else if game.isPlayerTurn[1] {
@@ -248,18 +248,18 @@ class GameViewController: UIViewController {
     
     // Denna funktion används för att hämta indexet för den vinnande spelaren i spelet.
     // Om det är spelare 1 som vinner returneras 1, om det är spelare 2 som vinner returneras 0.
-    func getWinnerName() -> Int {
-        if game.isPlayerTurn[0] {
+    func getWinnerName() -> Int? { // använder en optional Int? för att representera situationen där ingen vinnare har hittats
+        if game.isPlayerTurn[0] { // 1 om spelare 1 har vunnit
             return 1
-        } else if game.isPlayerTurn[1] {
+        } else if game.isPlayerTurn[1] { // 0 om spelare 2 har vunnit
             return 0
         }
-        // Om ingen har vunnit returneras 404 som en standardvärde.
-        return 404
+        // nil om ingen vinnare har hittats
+        return nil
     }
     
     // Denna funktion används för att inaktivera och dimma alla spelceller (knappar) som passerar i den medföljande arrayen.
-    func disableAllCells(UIButtons: Array<UIButton>) {
+    func disableAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
             button.isUserInteractionEnabled = false  // Inaktivera knappen.
             button.alpha = 0.7 // Sätt knappens opacitet för att dimma den.
@@ -267,7 +267,7 @@ class GameViewController: UIViewController {
     }
     
     // Denna funktion används för att aktivera och återställa opaciteten för alla spelceller (knappar) som passerar i den medföljande arrayen.
-    func enableAllCells(UIButtons: Array<UIButton>) {
+    func enableAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
             button.isUserInteractionEnabled = true  // Aktivera knappen.
             button.alpha = 1.0  // Återställ knappens opacitet för att göra den fullt synlig.
@@ -275,7 +275,7 @@ class GameViewController: UIViewController {
     }
     
     // Denna funktion används för att återställa alla spelceller (knappar) till standardbilden ("cell").
-    func blankAllCells(UIButtons: Array<UIButton>) {
+    func blankAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
             button.setImage(UIImage(named: "cell"), for: .normal)
         }

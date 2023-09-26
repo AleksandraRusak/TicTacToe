@@ -5,10 +5,10 @@
 //  Created by Aleksandra Rusak on 2023-09-17.
 
 
-//Den hanterar spelets logik, inklusive att avgöra om någon har vunnit, om spelet har slutat oavgjort och andra relevanta aspekter av spelet.
+//Den hanterar spelets logik, inklusive att avgöra om någon har vunnit, om spelet har slutat oavgjort osv.
 
 import Foundation
-import UIKit
+
 
 // TicTacToeGame-klassen är en Swift-klass som har två spelare: player1 och player2. Dessa spelare representeras av objekt av Player-klassen.
 class TicTacToeGame {
@@ -48,13 +48,13 @@ class TicTacToeGame {
     
     // Datorns drag
     func computerTurn() -> Int {
-        if hasWon || isDraw { return -1 }
+        if hasWon || isDraw { return -1 } // om spelet redan har vunnits av en spelare eller har slutat oavgjort. I båda fallen returnerar funktionen omedelbart -1 för att indikera att datorspelaren inte ska göra fler drag.
         
-        let randomInt = getRandomInt()
+        let randomInt = getRandomInt() // välja en slumpmässig cell
         if isButtonTapped[randomInt] == false {
             return randomInt
-        }
-        return computerTurn()
+        } // Här kontrolleras om den slumpmässigt valda cellen inte har blivit tryckt
+        return computerTurn() // Om den slumpmässigt valda cellen redan har blivit tryckt (dvs. isButtonTapped[randomInt] är true), anropar funktionen sig själv rekursivt (computerTurn()) för att försöka välja en annan slumpmässig cell tills den hittar en tillgänglig cell att göra ett drag på.
     }
     
     // getRandomInt-metoden genererar ett slumpmässigt heltal mellan 0 och 8.
@@ -63,16 +63,16 @@ class TicTacToeGame {
         return randomInt
     }
 
-    // toggleTurn-metoden används för att ändra turordningen mellan spelarna. Om isPlayerTurn är [true, false] kommer det att ändras till [false, true], och vice versa.
-    func toggleTurn(isPlayerTurn: [Bool]) -> [Bool] {
-        var isPlayerTurn = isPlayerTurn
-        
-        if isPlayerTurn[0] {
-            isPlayerTurn = [false, true]
-        } else if isPlayerTurn[1] {
-            isPlayerTurn = [true, false]
+    // switchPlayerTurn-metoden används för att ändra turordningen mellan spelarna. Om isPlayerTurn är [true, false] kommer det att ändras till [false, true], och vice versa.
+    func switchPlayerTurn(isPlayerTurn: [Bool]) -> [Bool] {
+        var newTurn = isPlayerTurn
+        // det är den första spelarens tur
+        if newTurn[0] {
+            newTurn = [false, true]
+        } else if newTurn[1] { // det är den andra spelarens tur
+            newTurn = [true, false]
         }
-        return isPlayerTurn
+        return newTurn
     }
     
     // appendToPlayerArray-metoden används för att lägga till indexet för en markerad cell till den aktuella spelarens array (player1Array eller player2Array).
@@ -85,7 +85,7 @@ class TicTacToeGame {
     }
     
     func checkIfWon(playerArray: [Int]) -> Bool {
-        if playerArray.count < 3 {
+        if playerArray.count < 3 { // kontrollerar om spelaren har färre än 3 markerade celler
             return false
         } else {
             for winCondition in winConditions {
