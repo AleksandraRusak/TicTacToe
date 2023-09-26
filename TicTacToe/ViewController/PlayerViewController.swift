@@ -9,9 +9,6 @@ import UIKit
 
 class PlayerViewController: UIViewController {
     
-    // En klass som ärver från UIViewController för att hantera spelarvyn.
-       
-    // Outlets för att ansluta till gränssnittselement i storyboard.
     @IBOutlet weak var lblResult: UILabel!
     @IBOutlet weak var imgResult: UIImageView!
     @IBOutlet weak var tfPlayer1: UITextField!
@@ -31,9 +28,8 @@ class PlayerViewController: UIViewController {
     @IBAction func btnPlay(_ sender: Any) {
     }
     
-    
+    // Switch between playing against the computer and playing against a player.
     @IBAction func switchAction(_ sender: UISwitch) {
-        // spel mot dator och spel mot spelare.
         isComputerGame = sender.isOn
                 tfPlayer2.isHidden = isComputerGame
                 imgResult.image = UIImage(named: isComputerGame ? "computer" : "person")
@@ -42,11 +38,11 @@ class PlayerViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Förberedelser inför övergången till spelvyn.
+      
         if segue.identifier == gameSegue {
             let destinationVC = segue.destination as! GameViewController
             
-            // Ange spelarnas namn och spelläge. kan bli tom
+            // Set players' names (can be empty)
             if tfPlayer1.text == "" {
                 tfPlayer1.text = "Player 1"
             }
@@ -55,7 +51,7 @@ class PlayerViewController: UIViewController {
                 tfPlayer2.text = "Player 2"
             }
             
-            // Kontrollera om det är ett datorspel eller ett tvåspelarsspel och skicka relevanta uppgifter till nästa vy.
+            // Check if it's a game with computer or a two-player game and send relevant information to the next view
             if isComputerGame {
                 destinationVC.isComputerGame = true
                 destinationVC.receivingName1 = tfPlayer1.text

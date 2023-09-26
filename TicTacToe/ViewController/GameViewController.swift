@@ -23,17 +23,17 @@ class GameViewController: UIViewController {
     @IBOutlet var imgBtns: [UIButton]!
     
     
-    // Fördröjning för datorns drag.
+    // Delay for computer's move
     var timer: Timer?
     
     
-    // variabler används för att lagra namnen på spelarna. De är initialt satta till nil.
+    // Variables used to store player names, initially set to nil
     var receivingName1: String?
     var receivingName2: String?
 
     var isComputerGame: Bool = false
     
-    // Skapa en instans av spelet och sätta dess initiala värden. Game är en instans av TicTacToeGame-klassen
+    // Create an instance of the game and set its initial values
     var game: TicTacToeGame = TicTacToeGame(
         player1: Player(name: "Player 1", isTurn: true, score: 0, isComputer: false),
         player2: Player(name: "Player 2", isTurn: false, score: 0, isComputer: false))
@@ -41,12 +41,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.layer.cornerRadius = 23
-        setupGame() //I detta fall anropar den setupGame-metoden för att förbereda spelet när vyn har laddats.
+        setupGame()
     }
     
-    // setupGame-metoden används för  att ställa in spelet, inklusive spelarnas namn och om det är ett spel mot datorn.
+    // set up the game, including player names and whether it's a game against the computer.
     func setupGame() {
-        // Sätt etiketter med spelarnas namn.
         if let receivingName1 = receivingName1,
            let receivingName2 = receivingName2 {
             game.player1.name = receivingName1
@@ -59,23 +58,21 @@ class GameViewController: UIViewController {
     }
     
     
-    // onPress-metoden anropas när en av spelcellerna (knappar) klickas på. Den bestämmer vilken cell som klickades på genom att antingen använda det skickade knappens tag-egenskap eller genom att anropa computerTurn (om det är datorns tur). Sedan anropas cellOnPress-metoden med taggen för att hantera draget.
-    
+    // The onPress method is called when one of the game cells (buttons) is clicked.
     @IBAction func onPress(_ sender: UIButton) {
         
-        // Deklarera en variabel för att lagra taggen på den klickade knappen.
+        // Declare a variable to store the tag of the clicked button
         var tag: Int?
         
-        // Om det är datorns tur och datorn är nästa spelare, använd datorns drag.
+        // If it's the computer's turn and the computer is the next player, use the computer's move
         if game.player2.isComputer && game.isPlayerTurn[1] {
             tag = game.computerTurn()
         } else {
-            // Annars, använd den tagg som är associerad med den klickade knappen.
+            // Otherwise, use the tag associated with the clicked button.
             tag = sender.tag
         }
         
-        // Den här delen av koden hanterar vilken cell som klickades på baserat på knappens tag. Den anropar cellOnPress(tag:) för att hantera draget.
-        
+        // This part of the code handles which cell was clicked based on the button's tag
         switch tag {
         case 0: cellOnPress(tag: tag ?? 0)
         case 1: cellOnPress(tag: tag ?? 1)
@@ -90,31 +87,30 @@ class GameViewController: UIViewController {
         }
     }
     
-    // onReset-metoden används när återställningsknappen trycks. Den återställer spelets tillstånd genom att återställa variabler, rensa alla spelceller och uppdatera användargränssnittet för att visa rätt meddelanden och dölja återställningsknappen.
+
     
     @IBAction func onReset(_ sender: UIButton) {
-        // Kontrollera om namnen på spelarna har mottagits och är giltiga.
+        // Check if player names have been received
         if let receivingName1 = receivingName1,
            let receivingName2 = receivingName2 {
             
-            // Återställ spelets tillstånd genom att köra setupGame-metoden.
+            // Reset the game state by running the setupGame method.
             setupGame()
             
-            // Återställ alla spelceller genom att tömma dem och aktivera dem igen.
+            // Reset all game cells by clearing and enabling them.
             blankAllCells(UIButtons: imgBtns)
             enableAllCells(UIButtons: imgBtns)
             
-            // Återställ titeln till "Turn to play:" och aktuellt spelarnamn.
+            // Reset the title to "Turn to play:" and the current player's name.
             lblTitle.text = "Turn to play:"
             lblName.text = getPlayerName(isPlayerTurn: game.isPlayerTurn, name1: receivingName1, name2: receivingName2)
             
-            // Dölj återställningsknappen igen.
             btnReset.isHidden = true
 
-            // Anropa onGameReset-metoden för att återställa spellogiken.
+            // Call the onGameReset method to reset the game logic
             game.onGameReset()
             
-            // Prompts datorn att göra ett drag om datorn börjar.
+            // Prompt the computer to make a move if it starts
             if game.player2.isComputer && game.isPlayerTurn[1] {
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: computerPress(timer:))
             }
@@ -123,47 +119,47 @@ class GameViewController: UIViewController {
     
     
     
-    // Denna metod hanterar logiken när en cell (knapp) klickas på. Den uppdaterar spelets tillstånd, kontrollerar om det finns en vinnare eller oavgjort, och uppdaterar användargränssnittet.
+    // This method handles the logic when a cell (button) is clicked.
     func cellOnPress(tag: Int) {
-        // Kontrollera om namnen på spelarna har mottagits och är giltiga.
+        // Check if player names have been received
         if let receivingName1 = receivingName1,
            let receivingName2 = receivingName2 {
             
-            // Markera att spelet har startat.
+            // Mark that the game has started.
             game.isGameStarted = true
             
             
-            // Visa återställningsknappen om spelet har startat.
+            // Show the reset button if the game has started.
             if game.isGameStarted {
                 btnReset.isHidden = false;
             }
             
-            // Sätt bilden på den klickade spelcellen baserat på den aktuella spelarens tur.
+            // Set the image on the clicked game cell based on the current player's turn
             imgBtns[tag].setImage(getImage(isPlayerTurn: game.isPlayerTurn), for: .normal)
             
-            // Byt tur till den andra spelaren.
+            // Switch the turn to the other player
             game.isPlayerTurn = game.switchPlayerTurn(isPlayerTurn: game.isPlayerTurn)
             
-            // Uppdatera namnet på den aktuella spelaren.
+            // Update the name of the current player
             lblName.text = getPlayerName(isPlayerTurn: game.isPlayerTurn, name1: receivingName1, name2: receivingName2)
             
-            // Lägg till den klickade spelcellens index i den aktuella spelarens array.
+            // Add the index of the clicked game cell to the current player's array
             game.appendToPlayerArray(isPlayerTurn: game.isPlayerTurn, index: tag)
             
-            // Inaktivera den cell som klickades på.
+            // Disable the cell that was clicked
             if game.isButtonTapped[tag] == false {
                 game.isButtonTapped[tag] = true
                 imgBtns[tag].isUserInteractionEnabled = false
             }
             
-            // Kolla om någon har vunnit.
+            // Check if there is a winner.
             if game.isPlayerTurn[0] {
                 game.hasWon = game.checkIfWon(playerArray: game.player1Array)
             } else {
                 game.hasWon = game.checkIfWon(playerArray: game.player2Array)
             }
             
-            // Om någon har vunnit, uppdatera gränssnittet med vinnarens namn och poäng.
+            // If there is a winner, update the interface with the winner's name and score.
             if game.hasWon {
                 lblTitle.text = "Winner:"
                 let winner = getWinnerName()
@@ -176,7 +172,7 @@ class GameViewController: UIViewController {
                     lblName.text = "Error"
                 }
                 
-                // Inaktivera alla spelceller och uppdatera poängen.
+                // Disable all game cells and update the scores.
                 disableAllCells(UIButtons: imgBtns)
                 game.updateScore()
                 lblPlayer1Score.text = String(game.player1.score)
@@ -185,10 +181,10 @@ class GameViewController: UIViewController {
                 game.isGameStarted = false
             }
             
-            // Kolla om spelet är oavgjort.
+            // Check if the game is a draw.
             game.isDraw = game.checkIfDraw()
             
-            // Om spelet är oavgjort, visa meddelande om oavgjort.
+            // If it's a draw, display a draw message.
             if game.isDraw {
                 lblTitle.text = ""
                 lblName.text = "Draw"
@@ -196,7 +192,7 @@ class GameViewController: UIViewController {
                 game.isGameStarted = false
             }
             
-            // Promptar datorn att göra ett drag om spelet inte är över.
+            // Prompt the computer to make a move if the game is not over.
             if game.hasWon == false && game.isDraw == false && game.player2.isComputer {
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: computerPress(timer:))
             }
@@ -204,77 +200,74 @@ class GameViewController: UIViewController {
     }
     
     
-    // Funktion för automatiskt datorns drag.
+    // Function for the automatic computer move.
     func computerPress(timer: Timer) {
         
-        // Kontrollera om det är datorns tur (player2) och att spelet inte har avgjorts (ingen har vunnit eller det är inte oavgjort).
         if game.isPlayerTurn[1] && !game.hasWon && !game.isDraw {
-            // Generera ett slumpmässigt drag för datorspelaren (player2).
+            // Generate a random move for the computer player (player2).
             var randomMove = Int.random(in: 0...8)
 
-            // Fortsätt att generera slumpmässiga drag tills ett tillgängligt drag hittas (en spelcell som inte är klickad på).
+            // Continue generating random moves until an available move is found (an unclicked game cell).
             while game.isButtonTapped[randomMove] {
                 randomMove = Int.random(in: 0...8)
             }
-            // Anropa cellOnPress med den beräknade taggen för draget.
+            // Call cellOnPress with the calculated tag for the move.
             cellOnPress(tag: randomMove)
         }
     }
     
     
-    // Denna funktion används för att hämta rätt bild (X eller O) för den aktuella spelaren baserat på det aktuella dragets spelarvändning.
     
+    // to retrieve the correct image (X or O) for the current player based on the current player turn.
     func getImage(isPlayerTurn: [Bool]) -> UIImage {
         if game.isPlayerTurn[0] {
             return UIImage(named: "X") ?? UIImage(named: "cell")!
         } else if game.isPlayerTurn[1] {
             return UIImage(named: "o") ?? UIImage(named: "cell")!
         }
-        // Om det inte finns någon giltig spelarvändning returneras en standardbild ("cell").
+        // If there is no valid player turn, return a default image ("cell").
         return UIImage(named: "cell") ?? UIImage(named: "cell")!
     }
     
-    // Denna funktion används för att hämta rätt spelarnamn baserat på den aktuella spelarvändningen.
-    // Om det är spelare 1:s tur returneras namn1, och om det är spelare 2:s tur returneras namn2.
+    
     func getPlayerName(isPlayerTurn: [Bool], name1: String, name2: String) -> String {
         if game.isPlayerTurn[0] {
             return name1
         } else if game.isPlayerTurn[1] {
             return name2
         }
-        // Om det inte finns någon giltig spelarvändning returneras "Error".
+        // If there is no valid player turn, return "Error".
         return "Error"
     }
     
-    // Denna funktion används för att hämta indexet för den vinnande spelaren i spelet.
-    // Om det är spelare 1 som vinner returneras 1, om det är spelare 2 som vinner returneras 0.
-    func getWinnerName() -> Int? { // använder en optional Int? för att representera situationen där ingen vinnare har hittats
-        if game.isPlayerTurn[0] { // 1 om spelare 1 har vunnit
+    
+    func getWinnerName() -> Int? { //an optional Int? to represent the situation where no winner has been found
+        if game.isPlayerTurn[0] { // 1 if player 1 wins
             return 1
-        } else if game.isPlayerTurn[1] { // 0 om spelare 2 har vunnit
+        } else if game.isPlayerTurn[1] { // 0 if player 2 wins
             return 0
         }
-        // nil om ingen vinnare har hittats
+        // nil if no winner has been found
         return nil
     }
     
-    // Denna funktion används för att inaktivera och dimma alla spelceller (knappar) som passerar i den medföljande arrayen.
+    // to disable and dim all game cells (buttons)
     func disableAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
-            button.isUserInteractionEnabled = false  // Inaktivera knappen.
-            button.alpha = 0.7 // Sätt knappens opacitet för att dimma den.
+            button.isUserInteractionEnabled = false
+            button.alpha = 0.7
         }
     }
     
-    // Denna funktion används för att aktivera och återställa opaciteten för alla spelceller (knappar) som passerar i den medföljande arrayen.
+    // to enable and reset the opacity of all game cells (buttons)
     func enableAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
-            button.isUserInteractionEnabled = true  // Aktivera knappen.
-            button.alpha = 1.0  // Återställ knappens opacitet för att göra den fullt synlig.
+            button.isUserInteractionEnabled = true
+            button.alpha = 1.0
         }
     }
     
-    // Denna funktion används för att återställa alla spelceller (knappar) till standardbilden ("cell").
+    // to reset all game cells (buttons) to the default image ("cell").
     func blankAllCells(UIButtons: [UIButton]) {
         for button in UIButtons {
             button.setImage(UIImage(named: "cell"), for: .normal)
