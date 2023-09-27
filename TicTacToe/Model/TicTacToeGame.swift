@@ -8,7 +8,6 @@
 // This class manages the game logic, including checking for a winner, a draw, etc.
 import Foundation
 
-
 class TicTacToeGame {
     var player1: Player
     var player2: Player

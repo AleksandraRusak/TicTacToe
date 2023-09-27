@@ -18,7 +18,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
 
-
     override func viewDidAppear(_ animated: Bool) {
             super.viewDidAppear(animated)
             
@@ -33,9 +32,6 @@ class ViewController: UIViewController {
                 UIView.animate(withDuration: 2.0, delay: 0, options: [.autoreverse, .repeat], animations: {
                     imageView.transform = CGAffineTransform(translationX: translationX, y: translationY)
                 })
-        
         }
-    
-    
 }
 

@@ -34,7 +34,6 @@ class PlayerViewController: UIViewController {
                 tfPlayer2.isHidden = isComputerGame
                 imgResult.image = UIImage(named: isComputerGame ? "computer" : "person")
                 lblResult.text = isComputerGame ? "Game against computer" : "Game against player"
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -64,6 +63,5 @@ class PlayerViewController: UIViewController {
              
         }
     }
-        
 
 }
